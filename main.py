@@ -1,10 +1,5 @@
 import math
-import os
-import re
 import sys
-
-data_files = [file for file in os.listdir('./data') if re.search(r'.*\.in$', file)]
-
 
 max_elephants_number = 1000000
 
