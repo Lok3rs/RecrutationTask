@@ -14,17 +14,25 @@ class Main {
     static long minElephantWeight = Long.MAX_VALUE;
 
     public static void main(String[] args) throws IOException {
-        System.out.println(checkMinimumStrengthNeeded(args[0]));
+        try {
+            System.out.println(checkMinimumStrengthNeeded(args[0]));
+        } catch (FileNotFoundException e) {
+            System.out.printf("There is no file '%s'", args[0]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("You need to provide filename after program call");
+        } catch (NumberFormatException | NullPointerException e) {
+            System.out.println("Invalid data format in file");
+        }
     }
 
-    public static int checkMinimumStrengthNeeded(String filename) throws IOException {
+    public static long checkMinimumStrengthNeeded(String filename) throws IOException {
         BufferedReader objReader = new BufferedReader(new FileReader(filename));
 
         int numberOfElephants = Integer.parseInt(objReader.readLine());
         String[] weightsStr = objReader.readLine().split(" ");
         String[] baseOrderStr = objReader.readLine().split(" ");
         String[] targetOrderStr = objReader.readLine().split(" ");
-        for (int i = 0; i < numberOfElephants; i++){
+        for (int i = 0; i < numberOfElephants; i++) {
             elephantsWeights[i] = Integer.parseInt(weightsStr[i]);
             minElephantWeight = Math.min(minElephantWeight, elephantsWeights[i]);
 
@@ -35,8 +43,7 @@ class Main {
 
         long minStrengthNeeded = 0;
         for (int i = 0; i < numberOfElephants; i++)
-            if (!checked[i])
-            {
+            if (!checked[i]) {
                 long min_cycle_weight = Long.MAX_VALUE;
                 long cycle_weights_sum = 0;
                 int cur = i;
@@ -49,10 +56,10 @@ class Main {
                     cycle_length++;
                 } while (cur != i);
                 minStrengthNeeded += Math.min(
-                        cycle_weights_sum+(cycle_length-2)*min_cycle_weight,
-                        cycle_weights_sum+min_cycle_weight+(cycle_length+1)*minElephantWeight
+                        cycle_weights_sum + (cycle_length - 2) * min_cycle_weight,
+                        cycle_weights_sum + min_cycle_weight + (cycle_length + 1) * minElephantWeight
                 );
             }
-        return (int) minStrengthNeeded;
+        return minStrengthNeeded;
     }
 }
