@@ -18,9 +18,7 @@ class Main {
             System.out.println(checkMinimumStrengthNeeded(args[0]));
         } catch (FileNotFoundException e) {
             System.out.printf("There is no file '%s'", args[0]);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("You need to provide filename after program call");
-        } catch (NumberFormatException | NullPointerException e) {
+        } catch (NumberFormatException | NullPointerException | ArrayIndexOutOfBoundsException e) {
             System.out.println("Invalid data format in file");
         }
     }
@@ -44,20 +42,20 @@ class Main {
         long minStrengthNeeded = 0;
         for (int i = 0; i < numberOfElephants; i++)
             if (!checked[i]) {
-                long min_cycle_weight = Long.MAX_VALUE;
-                long cycle_weights_sum = 0;
+                long minCycleWeight = Long.MAX_VALUE;
+                long cycleWeightsSum = 0;
                 int cur = i;
-                int cycle_length = 0;
+                int cycleLength = 0;
                 do {
-                    min_cycle_weight = Math.min(min_cycle_weight, elephantsWeights[cur]);
-                    cycle_weights_sum += elephantsWeights[cur];
+                    minCycleWeight = Math.min(minCycleWeight, elephantsWeights[cur]);
+                    cycleWeightsSum += elephantsWeights[cur];
                     cur = perm[cur];
                     checked[cur] = true;
-                    cycle_length++;
+                    cycleLength++;
                 } while (cur != i);
                 minStrengthNeeded += Math.min(
-                        cycle_weights_sum + (cycle_length - 2) * min_cycle_weight,
-                        cycle_weights_sum + min_cycle_weight + (cycle_length + 1) * minElephantWeight
+                        cycleWeightsSum + (cycleLength - 2) * minCycleWeight,
+                        cycleWeightsSum + minCycleWeight + (cycleLength + 1) * minElephantWeight
                 );
             }
         return minStrengthNeeded;

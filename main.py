@@ -52,7 +52,7 @@ if __name__ == "__main__":
     try:
         result = check_minimum_strength_needed(sys.argv[1])
         print(result)
-    except IndexError:
-        print("Invalid argument provided")
+    except (IndexError, ValueError):
+        print("Invalid data format")
     except FileNotFoundError:
         print(f"There is no file '{sys.argv[1]}'")
