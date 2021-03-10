@@ -1,4 +1,5 @@
-import java.io.*;
+// This task solved also with Python and JavaScript you can find on my github -> github.com/Lok3rs/RecrutationTask
+import java.util.Scanner;
 
 class Main {
 
@@ -13,23 +14,17 @@ class Main {
 
     static long minElephantWeight = Long.MAX_VALUE;
 
-    public static void main(String[] args) throws IOException {
-        try {
-            System.out.println(checkMinimumStrengthNeeded(args[0]));
-        } catch (FileNotFoundException e) {
-            System.out.printf("There is no file '%s'", args[0]);
-        } catch (NumberFormatException | NullPointerException | ArrayIndexOutOfBoundsException e) {
-            System.out.println("Invalid data format in file");
-        }
+    public static void main(String[] args) {
+        System.out.println(checkMinimumStrengthNeeded());
     }
 
-    public static long checkMinimumStrengthNeeded(String filename) throws IOException {
-        BufferedReader objReader = new BufferedReader(new FileReader(filename));
+    public static long checkMinimumStrengthNeeded() {
+        Scanner objReader = new Scanner(System.in);
 
-        int numberOfElephants = Integer.parseInt(objReader.readLine());
-        String[] weightsStr = objReader.readLine().split(" ");
-        String[] baseOrderStr = objReader.readLine().split(" ");
-        String[] targetOrderStr = objReader.readLine().split(" ");
+        int numberOfElephants = Integer.parseInt(objReader.nextLine());
+        String[] weightsStr = objReader.nextLine().split(" ");
+        String[] baseOrderStr = objReader.nextLine().split(" ");
+        String[] targetOrderStr = objReader.nextLine().split(" ");
         for (int i = 0; i < numberOfElephants; i++) {
             elephantsWeights[i] = Integer.parseInt(weightsStr[i]);
             minElephantWeight = Math.min(minElephantWeight, elephantsWeights[i]);
