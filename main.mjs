@@ -1,3 +1,5 @@
+// This task solved also with Python and Java you can find on my github -> github.com/Lok3rs/RecrutationTask
+// In order to run it you need to install fs and readline using npm and run it by node -> node main.js filename
 import fs from "fs";
 
 const maxElephantsNumber = 1000000;
@@ -9,11 +11,11 @@ let checked = new Array(maxElephantsNumber).fill(false);
 let minElephantWeight = Number.MAX_VALUE;
 
 const main = () => {
-    checkMinimumStrengthNeeded(process.argv[2])
+    checkMinimumStrengthNeeded()
 }
 
-const checkMinimumStrengthNeeded = (filename) => {
-    fs.readFile(filename, 'utf8', (err, data) => {
+const checkMinimumStrengthNeeded = () => {
+    fs.readFile(0, 'utf8', (err, data) => {
         const minStrengthNeeded = openFileCallback(err, data);
         console.log(minStrengthNeeded);
     });
