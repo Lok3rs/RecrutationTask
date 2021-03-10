@@ -1,18 +1,18 @@
+# This task solved also with Java and Javascript you can find on my github -> github.com/Lok3rs/RecrutationTask
 import math
 import sys
 
 max_elephants_number = 1000000
 
 
-def check_minimum_strength_needed(filename: str) -> int:
+def check_minimum_strength_needed() -> int:
     elephants_weights = [None] * max_elephants_number
     base_elephants_order = [None] * max_elephants_number
     perm = [None] * max_elephants_number
     checked = [None] * max_elephants_number
 
-    with open(filename, "r") as file:
+    with sys.stdin as file:
         number_of_elephants = int(file.readline())
-
         elephants_weight = file.readline().split()
         base_order = file.readline().split()
         target_order = file.readline().split()
@@ -49,10 +49,4 @@ def check_minimum_strength_needed(filename: str) -> int:
 
 
 if __name__ == "__main__":
-    try:
-        result = check_minimum_strength_needed(sys.argv[1])
-        print(result)
-    except (IndexError, ValueError):
-        print("Invalid data format")
-    except FileNotFoundError:
-        print(f"There is no file '{sys.argv[1]}'")
+    print(check_minimum_strength_needed())
